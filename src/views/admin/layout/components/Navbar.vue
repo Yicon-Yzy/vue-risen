@@ -19,6 +19,11 @@
         <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
+        <el-tooltip :content="houseContent"  effect="dark" placement="bottom" >
+          <div class="right-menu-item" @click ="flip">
+            <svg-icon icon-class="nav-home" />
+          </div>
+        </el-tooltip>
 
       </template>
 
@@ -62,7 +67,8 @@ export default {
   },
   data () {
     return {
-      avatar: ''
+      avatar: '',
+      whichtype:'',
     }
   },
   computed: {
@@ -70,6 +76,10 @@ export default {
       'sidebar',
       'device'
     ]),
+    houseContent(){
+      const whichtype = this.whichtype
+      return whichtype == 'front' ? '后台管理':'导航系统'
+    },
     setting: {
       get () {
         return this.$store.state.settings.showSettings
@@ -83,15 +93,29 @@ export default {
     }
   },
   created () {
+    const fullPath = this.$router.history.current.fullPath
+    this.whichtype = 'admin'
+    if (fullPath.match('front').length >= 0){
+      this.whichtype = 'front'
+    }
     if (this.$store.getters.userInfo.user.avatar) {
       this.avatar = baseImgUrl + this.$store.getters.userInfo.user.avatar
     } else {
       this.avatar = require('@/static/images/profile.jpg')
     }
   },
+  mounted() {
+  },
   methods: {
     toggleSideBar () {
       this.$store.dispatch('app/toggleSideBar')
+    },
+    flip() {
+      if (this.whichtype === 'front'){
+        this.$router.replace('/layout/home')
+      }else{
+        this.$router.replace('/front/navigator/home')
+      }
     },
     async logout () {
       this.$confirm('确定注销并退出系统吗？', '提示', {

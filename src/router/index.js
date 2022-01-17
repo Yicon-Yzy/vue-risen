@@ -16,7 +16,7 @@ Vue.use(Router)
 export const constantRoutes = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/front/navigator/home'
   },
   {
     path: '/redirect',
@@ -84,12 +84,12 @@ export const constantRoutes = [
   {
     path: '/front',
     name: 'Front',
-    component: () => import('@/views/front/layout'),
+    component: () => import('@/views/front/blog/layout'),
     children: [
       {
         path: 'technique/:u_id/:type',
         name: 'Technique',
-        component: () => import('@/views/front/technique'),
+        component: () => import('@/views/front/blog/technique'),
         meta: {
           title: '技术杂谈',
           keepAlive: false
@@ -98,7 +98,32 @@ export const constantRoutes = [
       {
         path: 'detail/:u_id',
         name: 'Detail',
-        component: () => import('@/views/front/detail'),
+        component: () => import('@/views/front/blog/detail'),
+        meta: {
+          title: '详情',
+          keepAlive: true
+        }
+      }
+    ]
+  },
+  {
+    path: '/front/navigator',
+    name: 'Front',
+    component: () => import('@/views/front/navigator/layout'),
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: () => import('@/views/front/navigator/home'),
+        meta: {
+          title: '导航首页',
+          keepAlive: false
+        }
+      },
+      {
+        path: 'detail',
+        name: 'Detail',
+        component: () => import('@/views/front/navigator/detail'),
         meta: {
           title: '详情',
           keepAlive: true

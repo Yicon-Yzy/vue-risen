@@ -14,6 +14,9 @@ export default {
   ArticleList: () => import('@/views/admin/blogModel/articleList'),
   ArticleType: () => import('@/views/admin/blogModel/articleType'),
   FriendlyLink: () => import('@/views/admin/blogModel/friendlyLink'),
-  BlogManage: () => import('@/views/admin/blogModel/blogManage')
+  BlogManage: () => import('@/views/admin/blogModel/blogManage'),
+
+  //导航模块
+  NavigatorMenu: () => import('@/views/admin/navigatorModel/navigatorMenu')
 
 }
