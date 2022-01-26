@@ -13,6 +13,7 @@ router.beforeEach((to, from, next) => {
   NProgress.start()
   // 前台
   if (to.fullPath.indexOf('/front') !== -1) {
+    debugger
     next()
   } else { // 后台
     if (getToken()) {

@@ -79,18 +79,21 @@ module.exports = {
   },
   devServer: {
     // https: true,
-    host: '0.0.0.0',
+    // host: '0.0.0.0',
+    host: 'dev.risen.com',
     port: 9528,
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        target: 'http://127.0.0.1:7001',
+        // target: 'http://127.0.0.1:7001',
+        target: 'http://dev.risen.com:7001',
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: '/api/v1'
         }
       },
       '/img_url': {
-        target: 'http://127.0.0.1:7001',
+        // target: 'http://127.0.0.1:7001',
+        target: 'http://dev.risen.com:7001',
         changeOrigin: true,
         pathRewrite: {
           '^/img_url': ''

@@ -1,5 +1,6 @@
 <template>
   <div class="navbar">
+    <dingtalk-login ref="login"></dingtalk-login>
     <h3 class="title">后台管理系统</h3>
 
     <div class="right-menu">
@@ -54,8 +55,10 @@
 </template>
 
 <script>
+import { getToken } from '@/utils/auth'
 import { mapGetters } from 'vuex'
 import Screenfull from '@/components/Screenfull/index'
+import DingtalkLogin from '@/components/DingtalkLogin/index'
 import SizeSelect from '@/components/SizeSelect/index'
 import { baseImgUrl } from '@/utils/config'
 
@@ -63,6 +66,7 @@ export default {
   inject: ['reload'],
   components: {
     Screenfull,
+    DingtalkLogin,
     SizeSelect
   },
   data () {
@@ -112,7 +116,15 @@ export default {
     },
     flip() {
       if (this.whichtype === 'front'){
-        this.$router.replace('/layout/home')
+        //TODO
+        //前面需要加一个登录功能
+        //如果是有token则需要直接跳转
+        //否则增加popup a window to login
+        if (getToken()) {
+          this.$router.replace('/layout/home')
+        }else{
+          this.$refs.login.toLogin()
+        }
       }else{
         this.$router.replace('/front/navigator/home')
       }

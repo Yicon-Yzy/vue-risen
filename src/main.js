@@ -14,6 +14,8 @@ import { getDicts } from '@/api/admin/system/dict/data'
 import permission from './directive/permission'
 import { baseImgUrl } from './utils/config'
 import mavonEditor from 'mavon-editor' // markdown编辑器
+import $ from 'jquery'
+window.$ = $
 
 import './permission' // permission control
 import 'nprogress/nprogress.css' // progress bar style
