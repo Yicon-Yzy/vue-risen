@@ -4,6 +4,9 @@ import HttpRequest from '@/utils/request'
 export function login (params = {}) {
   return HttpRequest('/login', 'post', params)
 }
+export function dinglogin (params = {}) {
+  return HttpRequest('/dinglogin', 'post', params)
+}
 
 // 登出
 export function logout (params = {}) {

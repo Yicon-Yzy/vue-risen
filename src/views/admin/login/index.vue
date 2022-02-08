@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" v-loading = "loading">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">登录</h3>
       <el-form-item prop="userName">
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { getCodeImg } from '@/api/admin/login'
+import { getCodeImg, dinglogin} from '@/api/admin/login'
 import Cookies from 'js-cookie'
 import { encrypt, decrypt } from '@/utils/jsencrypt'
 
@@ -78,7 +78,27 @@ export default {
       redirect: undefined
     }
   },
-  created () {
+  async created () {
+    const { params, query } = this.$route
+    const redirect = query.redirect
+    //第一次分裂取最后一个，第二次分裂取最后一个
+    let  code = redirect.split('?')
+    if (code.length === 2){
+      code = code[1].split('=')[1]
+      this.loading = true
+      this.$store
+        .dispatch('DingLogin', {code:code})
+        .then(() => {
+          this.loading = false
+          this.$router.push({
+            path: '/layout/home'
+          })
+        })
+        .catch(() => {
+          this.loading = false
+          this.getCode()
+        })
+    }
     this.getCode()
     this.getCookie()
   },
@@ -115,7 +135,7 @@ export default {
           this.$store
             .dispatch('Login', this.loginForm)
             .then(() => {
-              this.loading = false
+              this.loading = true
               this.$router.push({
                 path: '/layout/home'
               })

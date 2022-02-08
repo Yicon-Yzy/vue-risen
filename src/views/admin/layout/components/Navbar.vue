@@ -99,11 +99,20 @@ export default {
   created () {
     const fullPath = this.$router.history.current.fullPath
     this.whichtype = 'admin'
-    if (fullPath.match('front').length >= 0){
+    if (fullPath.match('front')){
       this.whichtype = 'front'
     }
-    if (this.$store.getters.userInfo.user.avatar) {
-      this.avatar = baseImgUrl + this.$store.getters.userInfo.user.avatar
+    const avatar = this.$store.getters.userInfo.user.avatar;
+
+    if (avatar) {
+      if (avatar.match("dingtalk")) // 从钉钉获取的头像图片
+      {
+        this.avatar = avatar;
+      }
+      else
+      {
+        this.avatar = baseImgUrl + this.$store.getters.userInfo.user.avatar
+      }
     } else {
       this.avatar = require('@/static/images/profile.jpg')
     }

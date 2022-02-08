@@ -1,4 +1,4 @@
-import { login, logout } from '@/api/admin/login'
+import { login, dinglogin, logout } from '@/api/admin/login'
 import { getInfo } from '@/api/admin/system/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { Message } from 'element-ui'
@@ -24,6 +24,24 @@ const user = {
     Login ({ commit }, params) {
       return new Promise((resolve, reject) => {
         login(params).then(res => {
+          if (res.code === 200014) {
+            Message({
+              type: 'error',
+              message: res.msg
+            })
+          } else {
+            setToken(res.data.token)
+            commit('SET_TOKEN', res.data.token)
+          }
+          resolve(res)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    async DingLogin ({ commit }, params) {
+      return await new Promise((resolve, reject) => {
+        dinglogin(params).then(res => {
           if (res.code === 200014) {
             Message({
               type: 'error',
