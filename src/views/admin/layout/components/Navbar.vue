@@ -102,19 +102,20 @@ export default {
     if (fullPath.match('front')){
       this.whichtype = 'front'
     }
-    const avatar = this.$store.getters.userInfo.user.avatar;
-
-    if (avatar) {
-      if (avatar.match("dingtalk")) // 从钉钉获取的头像图片
-      {
-        this.avatar = avatar;
+    // 先加载默认头像。如果有自定义头像就替换
+    this.avatar = require('@/static/images/profile.jpg')
+    if (this.$store.getters.userInfo) {
+      const avatar = this.$store.getters.userInfo.user.avatar;
+      if (avatar) {
+        if (avatar.match("dingtalk")) // 从钉钉获取的头像图片
+        {
+          this.avatar = avatar;
+        }
+        else //后台注册的用户头像图片
+        {
+          this.avatar = baseImgUrl + this.$store.getters.userInfo.user.avatar
+        }
       }
-      else
-      {
-        this.avatar = baseImgUrl + this.$store.getters.userInfo.user.avatar
-      }
-    } else {
-      this.avatar = require('@/static/images/profile.jpg')
     }
   },
   mounted() {
