@@ -24,7 +24,7 @@
         },
         methods: {
             // 点击登录
-            toLogin() {
+            toLogin(jumpurl) {
                 // alert(process.env.VUE_APP_REDIRECT_URL)
                 this.dingLoginShow = true
                 $('.ding_wrap .content').animate({top: '50%'}, 300)
@@ -45,6 +45,7 @@
                     else {
                         appid = 'dingoa83fqjqfaigm2ksrr'
                     }
+                    url = url + jumpurl
                     console.log(appid)
                     let obj = DDLogin({
                         id: "login_container",//这里需要你在自己的页面定义一个HTML标签并设置id，例如<div id="login_container"></div>或<span id="login_container"></span>
@@ -64,6 +65,7 @@
                             //拿到loginTmpCode后就可以在这里构造跳转链接进行跳转了
                             console.log("loginTmpCode", loginTmpCode);
 
+                            console.log("url",url)
                             url = encodeURIComponent(url)
                             let loadUrl = `https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid=${appid}&response_type=code&scope=snsapi_login&state=STATE&redirect_uri=${url}&loginTmpCode=${loginTmpCode}`
                             if (loginTmpCode)

@@ -39,6 +39,15 @@ export const constantRoutes = [
     }
   },
   {
+    path: '/dinglogin',
+    name: 'DingLogin',
+    hidden: true,
+    component: (resolve) => require(['@/views/admin/dinglogin'], resolve),
+    meta: {
+      title: '登录'
+    }
+  },
+  {
     path: '/user',
     component: (resolve) => require(['@/views/admin/layout'], resolve),
     hidden: true,

@@ -1,5 +1,5 @@
 <template>
-    <div class="WhiteScroll home_wrap">
+    <div class=" home_wrap">
         <img class="title" src="@/assets/img/hy@3x.jpg">
         <img class="title_2" src="@/assets/img/zy@3x.jpg">
         <div class="grid">
@@ -120,7 +120,7 @@
 <style scoped lang="scss">
     .home_wrap{
         background-color: #fff;
-        margin-top: 30px;
+        margin-top: 5px;
         height: calc(100vh - 111px);
         overflow-y: auto;
     }
