@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     visitedViews () {
-      return  this.$store.state.tagsView.visitedViews.filter(item => item.fullPath.indexOf("front") === -1)
+      return  this.$store.state.tagsView.visitedViews.filter(item => item.fullPath.indexOf("front") !== -1)
     },
     routes () {
       return this.$store.state.permission.menus

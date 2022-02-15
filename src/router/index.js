@@ -30,6 +30,11 @@ export const constantRoutes = [
     ]
   },
   {
+      path: '/guide',
+      name: 'guide',
+      component: () => import('@/views/front/navigator/pdf/index.vue'),
+  },
+  {
     path: '/login',
     name: 'Login',
     hidden: true,

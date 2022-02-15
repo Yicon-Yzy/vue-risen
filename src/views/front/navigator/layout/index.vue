@@ -17,8 +17,8 @@
 
 <script>
 import RightPanel from '@/components/RightPanel/index'
-import { AppMain, Settings, Sidebar, TagsView } from '@/views/admin/layout/components'
-import { Navbar } from '@/views/front/navigator/layout/components'
+import { AppMain, Settings } from '@/views/admin/layout/components'
+import { Navbar, TagsView, Sidebar } from '@/views/front/navigator/layout/components'
 import ResizeMixin from '@/views/admin/layout/mixin/ResizeHandler'
 import { mapState } from 'vuex'
 

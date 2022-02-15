@@ -6,9 +6,19 @@
             <i class="el-icon-close"></i>
         </div>
         <img src="../../assets/img/dl@3x.jpg" class="img">
-        <div class="login_wrap">
-            <div class="title">钉钉登录</div>
-            <div id="login_container"></div>
+        <div class="login_wrap" >
+          <div  v-if="qrcodeShow">
+            <!-- <div class="title">钉钉登录</div> -->
+            <div class="" @click="qrcodeClose">
+              <i class="el-icon-error title" style="font-size:20px;color:#909399"></i>
+            </div>
+            <div id="login_container">
+            </div>
+          </div>
+          <div v-else>
+
+111111111111
+          </div>
         </div>
     </div>
   </div>
@@ -20,6 +30,7 @@
         data() {
           return {
             dingLoginShow: false, // 钉钉扫码登录页面
+            qrcodeShow:true,
           }
         },
         methods: {
@@ -87,6 +98,9 @@
                     $('#login_container').html('')
                 })
             },
+            qrcodeClose() {
+              this.qrcodeShow = false;
+            },
         },
     }
 </script>
@@ -135,19 +149,16 @@
                 position: relative;
                 .title{
                     width: 100%;
-                    height: 25px;
-                    line-height: 25px;
-                    text-align: center;
-                    font-size: 18px;
+                    cursor: pointer;
                     color: #12133A;
                     position: absolute;
                     top: 40px;
-                    left: 0;
+                    left: 85%;
                 }
                 #login_container{
                     width: 330px;
                     height: 320px;
-                    margin-top: 50px;
+                    margin-top: 25px;
                 }
             }
         }
