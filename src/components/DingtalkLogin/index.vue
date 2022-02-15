@@ -16,8 +16,51 @@
             </div>
           </div>
           <div v-else>
-
-111111111111
+            <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login_form">
+              <el-form-item prop="userName">
+                <el-input v-model="loginForm.userName" type="text" auto-complete="off" placeholder="账号" class="enterpriseName">
+                  <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
+                </el-input>
+              </el-form-item>
+              <el-form-item prop="password">
+                <el-input
+                  class="enterpriseName"
+                  v-model="loginForm.password"
+                  type="password"
+                  auto-complete="off"
+                  placeholder="密码"
+                  @keyup.enter.native="handleLogin"
+                >
+                  <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
+                </el-input>
+              </el-form-item>
+              <!-- <el-form-item prop="captcha"> -->
+              <!--   <el-input -->
+              <!--     class="enterpriseName" -->
+              <!--     v-model="loginForm.captcha" -->
+              <!--     auto-complete="off" -->
+              <!--     placeholder="验证码" -->
+              <!--     style="width: 63%" -->
+              <!--     @keyup.enter.native="handleLogin" -->
+              <!--   > -->
+              <!--     <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" /> -->
+              <!--   </el-input> -->
+              <!--   <div class="login-captcha" v-html="codeHtml" @click="getCode"></div> -->
+              <!-- </el-form-item> -->
+              <el-checkbox v-model="loginForm.rememberMe" style="margin:0 0 25px 0;">记住密码</el-checkbox>
+              <el-form-item style="width:100%;">
+                <el-button
+                  :loading="loading"
+                  size="medium"
+                  type="primary"
+                  style="width:100%;"
+                  @click.native.prevent="handleLogin"
+                >
+                  <span v-if="!loading">登 录</span>
+                  <span v-else>登 录 中...</span>
+                </el-button>
+              </el-form-item>
+            </el-form>
           </div>
         </div>
     </div>
@@ -31,9 +74,34 @@
           return {
             dingLoginShow: false, // 钉钉扫码登录页面
             qrcodeShow:true,
+            codeHtml: '',
+            cookiePassword: '',
+            loginForm: {
+              userName: 'admin',
+              password: '123456',
+              rememberMe: false,
+              captcha: '',
+              uuid: ''
+            },
+            loginRules: {
+              userName: [
+                { required: true, trigger: 'blur', message: '用户名不能为空' }
+              ],
+              password: [
+                { required: true, trigger: 'blur', message: '密码不能为空' }
+              ],
+              captcha: [{ required: true, trigger: 'change', message: '验证码不能为空' }]
+            },
+            loading: false,
+            redirect: undefined
           }
         },
         methods: {
+ //           getCode () {
+ //             getCodeImg().then(res => {
+ //               this.codeHtml = res
+//              })
+ //           },
             // 点击登录
             toLogin(jumpurl) {
                 // alert(process.env.VUE_APP_REDIRECT_URL)
@@ -160,7 +228,35 @@
                     height: 320px;
                     margin-top: 25px;
                 }
+                .login_form{
+                  margin:30px;
+                  .login-captcha {
+                    width: 33%;
+                    height: 38px;
+                    float: right;
+                    box-sizing: border-box;
+                    border: 1px solid #bebebe;
+                    svg {
+                      cursor: pointer;
+                      vertical-align: middle;
+                      height: 100%;
+                      width: 100%;
+                    }
+                  }
+                }
             }
         }
     }
+
+::v-deep .enterpriseName .el-input__inner {
+  //background-color: #e8e8e8;
+  text-align: center;
+  //border-color: #c0c4cc;
+  padding:15px 20px;
+  //color:#000;
+  box-shadow:none;
+  border:none;
+  border-bottom: thin solid #000000;
+  border-radius:unset;
+}
 </style>
