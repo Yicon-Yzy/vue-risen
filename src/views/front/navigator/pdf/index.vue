@@ -18,15 +18,19 @@
             '$route'(newValue, oldValue) {
                 console.log(this.$route.query.name)
                 let name = this.$route.query.name
-                let origin = location.origin
-                this.url = `/pdf/web/viewer.html?file=${origin}/src/${name}.pdf&${Math.random()}`
+                //let origin = location.origin
+                //this.url = `/pdf/web/viewer.html?file=${origin}/src/${name}.pdf&${Math.random()}`
                 // this.url = `/pdf/web/viewer.html?file=./template.pdf`
+                let origin = `https://object.risen.com/navigator`
+                this.url = `${origin}/pdf/web/viewer.html?file=${origin}/src/${name}.pdf&${Math.random()}`
             },
         },
         mounted() {
-            let name = this.$route.query.name
-            let origin = location.origin
-            this.url = `/pdf/web/viewer.html?file=${origin}/src/${name}.pdf&${Math.random()}`
+          let name = this.$route.query.name
+          //let origin = location.origin
+          //this.url = `/pdf/web/viewer.html?file=${origin}/src/${name}.pdf&${Math.random()}`
+          let origin = `https://object.risen.com/navigator`
+          this.url = `${origin}/pdf/web/viewer.html?file=${origin}/src/${name}.pdf&${Math.random()}`
         },
     }
 </script>
